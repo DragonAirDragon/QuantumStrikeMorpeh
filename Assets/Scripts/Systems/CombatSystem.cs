@@ -9,13 +9,6 @@ using System;
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 public sealed class CombatSystem : ISystem {    
-    #region Constants        
-    private const float ENTITY_DETECTION_RADIUS = 1f;    
-    private const float SAFE_DISTANCE_OFFSET = 1f; // Фиксированное смещение от границы атаки    
-    private const float MIN_SAFE_DISTANCE = 1.5f;    
-    private const float PATH_UPDATE_THRESHOLD = 2f;    
-    private const float AGENT_MOVEMENT_TOLERANCE = 0.5f; // Допуск для остановки агента        \
-    #endregion
     
     #region Properties
     
@@ -36,12 +29,6 @@ public sealed class CombatSystem : ISystem {
     private Stash<FractionComponent> fractionStash;
     private Stash<MovableComponent> movableStash;
     private Stash<SelectionComponent> selectionStash;
-    
-    // Системные компоненты
-    private Camera mainCamera;
-    
-    // Настройки
-    private bool autoAttackEnabled = true;
     
     #endregion
     

@@ -14,6 +14,10 @@ public class Startup : MonoBehaviour
         systemsGroup.AddSystem(new SelectionVisualSystem());
         systemsGroup.AddSystem(new CombatSystem());
         systemsGroup.AddSystem(new DeathCleanupSystem());
+        systemsGroup.AddSystem(new BuildingSystem());
+        systemsGroup.AddSystem(new GridSystem());
+        systemsGroup.AddSystem(new FactorySystem());
+        
         this.world.AddSystemsGroup(order: 0, systemsGroup);
     }
 }

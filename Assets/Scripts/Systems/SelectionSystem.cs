@@ -1,6 +1,7 @@
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [Il2CppSetOption(Option.NullChecks, false)]
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
@@ -15,12 +16,12 @@ public sealed class SelectionSystem : ISystem
     private Stash<SelectionComponent> selectionStash;
     private Stash<SelectionBoxComponent> selectionBoxStash;
     private Entity selectionBoxEntity;
+    
     public void OnAwake() 
     {
         this.selectionStash = World.GetStash<SelectionComponent>();
         this.filter = World.Filter.With<SelectionComponent>().Build();
         this.mainCamera = Camera.main;
-
 
         this.selectionBoxStash = World.GetStash<SelectionBoxComponent>();
         this.selectionBoxFilter = World.Filter.With<SelectionBoxComponent>().Build();
@@ -29,10 +30,14 @@ public sealed class SelectionSystem : ISystem
 
     public void OnUpdate(float deltaTime) 
     {
+        // Проверяем, находится ли курсор над UI элементом
+        if (IsPointerOverUI())
+        {
+            return; // Не обрабатываем выбор, если курсор над UI
+        }
+        
         isShiftPressed = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         ref var selectionBox = ref selectionBoxStash.Get(selectionBoxEntity);
-        
-        
         
         if (Input.GetMouseButtonDown(0)) {
             selectionBox.isSelecting = true;
@@ -50,6 +55,34 @@ public sealed class SelectionSystem : ISystem
             selectionBox.isSelecting = false;
             SelectEntitiesInBox(selectionBox.startPos, selectionBox.currentPos);
         }
+    }
+    
+    /// <summary>
+    /// Проверяет, находится ли курсор мыши над UI элементом
+    /// </summary>
+    /// <returns>True, если курсор над UI</returns>
+    private bool IsPointerOverUI()
+    {
+        // Проверяем для мыши
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        {
+            return true;
+        }
+        
+        // Дополнительная проверка для мобильных устройств (касания)
+        if (Input.touchCount > 0)
+        {
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                Touch touch = Input.GetTouch(i);
+                if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
 
     private void ClearSelection() {

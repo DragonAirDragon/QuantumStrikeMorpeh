@@ -1,8 +1,10 @@
 {
   "dependencies": {
     "com.boxqkrtm.ide.cursor": "https://github.com/boxqkrtm/com.unity.ide.cursor.git",
+    "com.codewriter.morpeh.events": "https://github.com/codewriter-packages/Morpeh.Events.git",
     "com.codewriter.triinspector": "https://github.com/codewriter-packages/Tri-Inspector.git",
     "com.cursor.unity-mcp": "file:D:/UnityMCP-Cursor/unity-mcp-package",
+    "com.kyrylokuzyk.primetween": "file:../Assets/Plugins/PrimeTween/internal/com.kyrylokuzyk.primetween.tgz",
     "com.scellecs.morpeh": "https://github.com/scellecs/morpeh.git?path=Scellecs.Morpeh",
     "com.unity.ai.navigation": "2.0.7",
     "com.unity.collab-proxy": "2.8.2",
