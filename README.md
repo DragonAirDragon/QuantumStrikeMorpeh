@@ -122,5 +122,5 @@ QuantumStrikeMorpeh/
 
 ## Ссылки
 
-*   GitHub Репозиторий: [https://github.com/DragonAirDragon/QuantumStrikeMorpeh]
-*   Страница Портфолио: [https://dragonairdragon.github.io/QuantumStrike.html](https://dragonairdragon.github.io/QuantumStrike.html) (Раздел о проекте)
+*   GitHub Репозиторий: https://github.com/DragonAirDragon/QuantumStrikeMorpeh
+*   Страница Портфолио: https://dragonairdragon.github.io/QuantumStrike.html (Раздел о проекте)
